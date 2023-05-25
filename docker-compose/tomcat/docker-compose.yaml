@@ -3,7 +3,7 @@ services:
  tomcat:
    image: tomcat-image-web
    ports:
-      - 8090:8080
+      - 8082:8080
    container_name:  mytomcat-server
 
    volumes:
