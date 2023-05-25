@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+ tomcat:
+   image: tomcat-image-web
+   ports:
+      - 8090:8080
+   container_name:  mytomcat-server
+
+   volumes:
+      - /root/project-devops/tomcat/my-webapp:/opt/tomcat/webapps/ROOT
