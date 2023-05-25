@@ -10,19 +10,36 @@
 
 
 ## Jenkins Commands
-```docker build -t myjenkins-image .```
+```bash
+docker build -t myjenkins-image .
+```
 
-```docker run -d --name myjenkins-server -p 8080:8080 myjenkins-image```
+```bash
+docker run -d --name myjenkins-server -p 8080:8080 myjenkins-image
+```
 
 ## Tomcat Commands
 
-```docker build -t mytomcatimage .```
+```bash
+docker build -t mytomcatimage .
+```
 
-```docker run -d --name mytomcat-server -p 8081:8080 mytomcatimage```
+```bash
+docker run -d --name mytomcat-server -p 8081:8080 mytomcatimage
+```
 
-```docker exec -it mytomcat-server /bin/bash```
+```bash
+docker exec -it mytomcat-server /bin/bash
+```
 
-```docker stop mytomcat-server```
-```docker rm mytomcat-server```
+```bash
+docker stop mytomcat-server
+```
 
-```docker run -d --name mytomcat-server -v /root/tomcat/my-webapp:/opt/tomcat/webapps/ROOT -p 8081:8080 tomcatimage```
+```bash
+docker rm mytomcat-server
+```
+
+```bash
+docker run -d --name mytomcat-server -v /root/tomcat/my-webapp:/opt/tomcat/webapps/ROOT -p 8081:8080 tomcatimage
+```
