@@ -1,6 +1,6 @@
 # DevOpsPlayground
 
-## Plugin to install
+## Plugin to install in Jenkins
 
 - GitHub plugin
 - Maven Integration plugin
