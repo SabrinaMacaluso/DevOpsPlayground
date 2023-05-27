@@ -43,3 +43,38 @@ docker rm mytomcat-server
 ```bash
 docker run -d --name mytomcat-server -v /root/tomcat/my-webapp:/opt/tomcat/webapps/ROOT -p 8081:8080 tomcatimage
 ```
+
+
+
+
+## Other Commands
+
+### remove all containers
+
+To remove all containers, use the following command: ```docker rm $( docker ps -aq )```
+
+### remove image 
+
+```bash
+docker rmi <image-id>
+```
+
+### Push images in dockerhub
+
+```bash
+docker login
+```
+
+```bash
+docker tag myjenkinsfordockerrepo:latest sabrinasabrina/myjenkinsimage
+```
+
+```bash
+docker push sabrinasabrina/myjenkinsimage
+```
+
+### Locate java opendjk installation directory
+
+```bash
+readlink -f $(which java)
+```
