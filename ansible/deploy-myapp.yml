@@ -1,0 +1,17 @@
+---
+- hosts: docker-host
+  tasks:
+  - name: Stop existing regapp-server container
+    command: docker stop regapp-server
+    ignore_errors: yes
+
+  - name: Remove regapp-server container
+    command: docker rm regapp-server
+    ignore_errors: yes
+
+  - name: Remove sabrinasabrina/myregapp:latest image
+    command: docker rmi sabrinasabrina/myregapp:latest
+    ignore_errors: yes
+
+  - name: Run sabrinasabrina/myregapp:latest image in regapp-server container
+    command: docker run -d --name regapp-server -p 8082:8080 sabrinasabrina/myregapp
