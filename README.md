@@ -97,3 +97,27 @@ docker push sabrinasabrina/myjenkinsimage
 ```bash
 readlink -f $(which java)
 ```
+
+
+## SSH Configuration
+Install the openssh-server and configure the ssh_config file:
+```bash
+apt install openssh-server
+```
+
+```bash
+nano /etc/ssh/ssh_config 
+```
+
+In the ssh_config file, uncheck PasswordAuthentication and Port 22:
+
+ ```bash
+ PasswordAuthentication yes
+ Port 22
+```
+
+Restart the SSH service:
+ ```bash
+service ssh restart
+```
+ 
