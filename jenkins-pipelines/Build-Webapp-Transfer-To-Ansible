@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    
+    triggers {
+        pollSCM '* * * * *'
+    }
+   
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/SabrinaMacaluso/mywebapp'
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('webapp'){
+                     sh '/opt/maven/bin/mvn clean install'
+                }
+               
+            }
+        }
+        
+        stage('Transfer to Ansible Host') {
+    steps {
+        script {
+            def ansibleHost = '192.168.56.112'
+            def ansibleUsername = 'ansibleadmin'
+            def ansiblePassword = 'passwd'
+            def remoteDirectory = '/opt/docker'
+            def remoteFilePath = remoteDirectory + '/webapp.war'
+           
+            sh "sshpass -p '${ansiblePassword}' scp -o StrictHostKeyChecking=no -r /var/jenkins_home/workspace/BuildMonAppWEBAPP/webapp/target/*.war ${ansibleUsername}@${ansibleHost}:${remoteFilePath}"
+        }
+    }
+}
+        
+
+    }
+}
