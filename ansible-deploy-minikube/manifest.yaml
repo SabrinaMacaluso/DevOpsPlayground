@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapphub-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapphub
+  template:
+    metadata:
+      labels:
+        app: myapphub
+    spec:
+      containers:
+      - name: myapphub-container
+        image: sabrinasabrina/monappli:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: dockerhub-credentials
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: dockerhub-credentials
+              key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapphub-service
+spec:
+  selector:
+    app: myapphub
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dockerhub-credentials
+type: Opaque
+data:
+  username: dXNlcg==  # base64-encoded value of 'yourlogin'
+  password: cHNz  # base64-encoded value of 'yourpassword'
