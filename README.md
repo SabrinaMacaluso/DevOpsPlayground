@@ -120,4 +120,18 @@ Restart the SSH service:
  ```bash
 service ssh restart
 ```
+ ## Minikube
+ Apply the ConfigMap with your credentials:
+  ```bash
+ kubectl apply -f dockerhub-credentials.yaml
+```  
+ Apply the Deployment: 
+ 
+  ```bash
+ kubectl apply -f myapphub-deployment.yaml
+ ```
+ Apply the Service:
+  ```bash
+ kubectl apply -f myapphub-service.yaml
+ ```
  
