@@ -9,37 +9,48 @@
 - SSH Pipeline Steps
 
 
-## Jenkins Commands
+## Setting up Jenkins and Tomcat with Docker
+
+### Jenkins Commands
+
+Build Docker image for Jenkins: 
+
 ```bash
 docker build -t myjenkins-image .
 ```
+Create the Jenkins container:
 
 ```bash
 docker run -d --name myjenkins-server -p 8080:8080 myjenkins-image
 ```
 
-## Tomcat Commands
+### Tomcat Commands
+
+Build Docker image for Tomcat: 
 
 ```bash
 docker build -t mytomcatimage .
 ```
 
+Create the Tomcat container:
 ```bash
 docker run -d --name mytomcat-server -p 8081:8080 mytomcatimage
 ```
 
+Access the Tomcat server's shell:
+
 ```bash
 docker exec -it mytomcat-server /bin/bash
 ```
-
+Stop the Tomcat container
 ```bash
 docker stop mytomcat-server
 ```
-
+Remove the Tomcat container
 ```bash
 docker rm mytomcat-server
 ```
-
+Run the Tomcat container with a volume
 ```bash
 docker run -d --name mytomcat-server -v /root/tomcat/my-webapp:/opt/tomcat/webapps/ROOT -p 8081:8080 tomcatimage
 ```
@@ -49,9 +60,17 @@ docker run -d --name mytomcat-server -v /root/tomcat/my-webapp:/opt/tomcat/webap
 
 ## Other Commands
 
+### Check volumes
+
+```bash
+docker volume ls
+```
+
 ### remove all containers
 
-To remove all containers, use the following command: ```docker rm $( docker ps -aq )```
+```bash
+docker rm $( docker ps -aq )
+```
 
 ### remove image 
 
