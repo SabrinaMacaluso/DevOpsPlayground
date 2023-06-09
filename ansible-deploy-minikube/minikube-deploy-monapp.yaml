@@ -1,0 +1,14 @@
+---
+- name: Deploy App in Minikube
+  hosts: minikube
+
+  tasks:
+    - name: Copy manifest.yaml
+      copy:
+        src: manifest.yaml
+        dest: /home/muser/test/manifest.yaml
+  
+    - name: Deploy manifest.yaml
+      command: "kubectl apply -f /home/muser/test/manifest.yaml"
+      become: yes
+      become_user: muser
