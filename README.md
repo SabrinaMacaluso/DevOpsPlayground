@@ -135,3 +135,18 @@ service ssh restart
  kubectl apply -f myapphub-service.yaml
  ```
  
+ ## Ansible
+ 
+To encode your password using the base64 command:
+```bash
+ echo -n "yourlogin" | base64
+ ```
+ 
+ To apply the playbook for creating the Docker image and pushing it to DockerHub, run the command:
+```bash 
+ ansible-playbook create_image.yaml
+  ```
+ To apply the playbook for deploying the web application pulled from DockerHub to Minikube, run the command:
+ ```bash
+ ansible-playbook minikube-deploy-monapp.yaml
+ ```
