@@ -150,3 +150,9 @@ To encode your password using the base64 command:
  ```bash
  ansible-playbook minikube-deploy-monapp.yaml
  ```
+ 
+ To access the web application deployed in Minikube
+  ```bash
+ minikube service myapphub-service --url
+```
+ 
