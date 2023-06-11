@@ -156,3 +156,11 @@ To encode your password using the base64 command:
  minikube service myapphub-service --url
 ```
  
+  ## Proxy configuration
+  
+  ### Maven
+  
+  Modify the setting.xml file in Maven and add the proxy configuration.
+  
+![maven-setting-xml-config-proxy](https://user-images.githubusercontent.com/104983001/236400088-a5c10f69-2704-4180-89a9-ba7b7777c6b8.png)
+  
