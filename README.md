@@ -1,5 +1,7 @@
 # DevOpsPlayground
 
+![readmee](https://github.com/SabrinaMacaluso/DevOpsPlayground/assets/104983001/1e2a5dac-e15e-42ed-8261-be7ad1d5fad8)
+
 ## Plugin to install in Jenkins
 
 - GitHub plugin
