@@ -9,6 +9,7 @@
 - SSH Pipeline Steps
 
 
+
 ## Setting up Jenkins and Tomcat with Docker
 
 ### Jenkins Commands
@@ -22,6 +23,11 @@ Create the Jenkins container:
 
 ```bash
 docker run -d --name myjenkins-server -p 8080:8080 myjenkins-image
+```
+Create the Jenkins container with volume using docker-compose in the `docker-compose/jenkins` directory:
+
+```bash
+docker-compose up 
 ```
 
 ### Tomcat Commands
@@ -98,6 +104,29 @@ docker push sabrinasabrina/myjenkinsimage
 readlink -f $(which java)
 ```
 
+## Setting up Jenkins server
+
+Install Maven on the Jenkins server:
+
+```bash
+wget https://dlcdn.apache.org/maven/maven-3/3.9.2/binaries/apache-maven-3.9.2-bin.tar.gz
+tar -xzvf apache-maven-3.9.2-bin.tar.gz
+```
+
+Update the .profile to configure the variables for maven on the jenkins server:
+
+```bash
+M2_HOME=/opt/maven
+M2=/opt/maven/bin
+#To locate openjdk, use readlink -f $(which java)
+JAVA_HOME=/opt/java/openjdk
+PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2
+export PATH
+```
+Apply the changes with:
+```bash
+source .profile
+```
 
 ## SSH Configuration
 Install the openssh-server and configure the ssh_config file:
