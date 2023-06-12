@@ -2,11 +2,11 @@
 - hosts: ansible
   tasks: 
   - name: create docker image
-    command: docker build -t regestryapp:latest .
+    command: docker build -t monappli:latest .
     args:
       chdir: /opt/monapp
   - name: create tag to push onto dockerhub
-    command: docker tag regestryapp:latest sabrinasabrina/monappli:latest
+    command: docker tag monappli:latest sabrinasabrina/monappli:latest
 
   - name: push docker image onto dockerhub
     command: docker push sabrinasabrina/monappli:latest
