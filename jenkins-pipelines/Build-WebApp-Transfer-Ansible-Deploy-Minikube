@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+    
+    triggers {
+        pollSCM '* * * * *'
+    }
+   
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/SabrinaMacaluso/mywebapp'
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('webapp'){
+                     sh '/opt/maven/bin/mvn clean install'
+                }
+               
+            }
+        }
+        
+        stage('Transfer to Ansible Host') {
+    steps {
+        script {
+            def ansibleHost = '192.168.56.112'
+            def ansibleUsername = 'ansibleadmin'
+            def ansiblePassword = 'ansibleadmin'
+            def remoteDirectory = '/opt/monapp'
+            def remoteFilePath = remoteDirectory + '/webapp.war'
+           
+            sh "sshpass -p '${ansiblePassword}' scp -o StrictHostKeyChecking=no -r /var/jenkins_home/workspace/BuildMonAppWEBAPP/webapp/target/*.war ${ansibleUsername}@${ansibleHost}:${remoteFilePath}"
+        }
+    }
+}
+        
+        stage('Deploy') {
+    steps {
+        script {
+            def ansibleHost = '192.168.56.112'
+            def ansibleUsername = 'ansibleadmin'
+            def ansiblePassword = 'ansibleadmin'
+            def ansiblePlaybookPath1 = '/opt/monapp/create_image.yaml'
+            def ansiblePlaybookPath2 = '/opt/monapp/minikube_deploy_monapp.yaml'
+            def sleepTimeInSeconds = 60  
+
+            sh "sshpass -p '${ansiblePassword}' ssh -o StrictHostKeyChecking=no ${ansibleUsername}@${ansibleHost} 'ansible-playbook ${ansiblePlaybookPath1}'"
+            sh "sleep ${sleepTimeInSeconds}"
+            sh "sshpass -p '${ansiblePassword}' ssh -o StrictHostKeyChecking=no ${ansibleUsername}@${ansibleHost} 'ansible-playbook ${ansiblePlaybookPath2}'"
+        }
+    }
+}
+
+    }
+}
