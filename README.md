@@ -195,3 +195,18 @@ To encode your password using the base64 command:
   
 ![maven-setting-xml-config-proxy](https://user-images.githubusercontent.com/104983001/236400088-a5c10f69-2704-4180-89a9-ba7b7777c6b8.png)
   
+
+
+Docker
+Modify the /usr/lib/systemd/system/docker.service file using the following command:
+
+```bash
+nano /usr/lib/systemd/system/docker.service
+
+```
+
+```bash
+Environment=http_proxy=http://<IP-PROXY>:<PORT>/
+Environment=no_proxy=localhost,127.0.0.1
+Environment=https_proxy=http://<IP-PROXY>:<PORT>/
+```
