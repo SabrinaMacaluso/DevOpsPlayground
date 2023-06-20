@@ -129,6 +129,13 @@ Apply the changes with:
 ```bash
 source .profile
 ```
+Configure JDK and Maven in Jenkins:
+
+Manage Jenkins > Global Tool Configuration then specify the JDK and Maven paths
+
+![jdkmaven](https://github.com/SabrinaMacaluso/DevOpsPlayground/assets/104983001/a45ecef1-76ae-4bfb-8861-1a877c461531)
+
+
 
 ## SSH Configuration
 Install the openssh-server and configure the ssh_config file:
