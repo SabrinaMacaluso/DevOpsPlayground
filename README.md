@@ -210,3 +210,30 @@ Environment=http_proxy=http://<IP-PROXY>:<PORT>/
 Environment=no_proxy=localhost,127.0.0.1
 Environment=https_proxy=http://<IP-PROXY>:<PORT>/
 ```
+
+![docker-proxy - Copie](https://user-images.githubusercontent.com/104983001/236454200-55d1b890-acb5-4292-8ef3-28bdf860cb1f.PNG) 
+
+```bash
+systemctl daemon-reload
+systemctl restart docker.service
+```
+
+## Troubleshooting
+
+If this error :
+
+``` SSH: Connecting with configuration [ansible] ... SSH: Disconnecting configuration [ansible] ... ERROR: Exception when publishing, exception message [Permission denied] Build step 'Send build artifacts over SSH' changed build result to UNSTABLE```
+
+* Make sure that the 'ansibleadmin' user has the correct permissions to access the docker directory. You can give 'ansibleadmin' ownership of the docker directory using the following command:
+
+```chown ansibleadmin:ansibleadmin docker```
+
+* Error with pollscm: if you experience an error related to pollscm, you can try increasing the `execTimeout` configuration to 300,000 ms instead of 120,000 ms: 
+
+```execTimeout: 300000```
+
+* To enable the transfer of the webapp.war file in Jenkins pipelines, you need to install sshpass on the Jenkins host:
+
+```sudo apt update```
+
+ ```sudo apt install sshpass```
